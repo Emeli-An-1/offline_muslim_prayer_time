@@ -1,0 +1,405 @@
+2025-10-05 19:40:05,114 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 19:40:05,114 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 19:40:05,114 - __main__ - INFO - Platform: win32
+2025-10-05 19:40:05,297 - services.storage - INFO - Storage service initialized
+2025-10-05 19:40:05,298 - __main__ - INFO - Storage service initialized
+2025-10-05 19:40:05,298 - __main__ - ERROR - Failed to initialize application: 'NoneType' object is not callable
+2025-10-05 19:40:05,298 - root - ERROR - Critical error in PrayerOffline: 'NoneType' object is not callable
+2025-10-05 19:40:05,301 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 116, in main
+    app = PrayerOfflineApp(page, storage)
+  File "d:\PTime_Flet\prayer_offline\app.py", line 40, in __init__
+    self.prayer_calculator = PrayerTimesCalculator()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+TypeError: 'NoneType' object is not callable
+
+2025-10-05 19:41:00,085 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 19:41:00,086 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 19:41:00,088 - __main__ - INFO - Platform: win32
+2025-10-05 19:41:00,109 - services.storage - INFO - Storage service initialized
+2025-10-05 19:41:00,111 - __main__ - INFO - Storage service initialized
+2025-10-05 19:41:00,113 - __main__ - ERROR - Failed to initialize application: 'NoneType' object is not callable
+2025-10-05 19:41:00,113 - root - ERROR - Critical error in PrayerOffline: 'NoneType' object is not callable
+2025-10-05 19:41:00,115 - root - ERROR - Traceback (most recent call last):
+  File "D:\PTime_Flet\prayer_offline\main.py", line 116, in main
+    app = PrayerOfflineApp(page, storage)
+  File "D:\PTime_Flet\prayer_offline\app.py", line 40, in __init__
+    self.prayer_calculator = PrayerTimesCalculator()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+TypeError: 'NoneType' object is not callable
+
+2025-10-05 19:42:07,283 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 19:42:07,286 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 19:42:07,326 - __main__ - INFO - Platform: win32
+2025-10-05 19:42:07,335 - services.storage - INFO - Storage service initialized
+2025-10-05 19:42:07,345 - __main__ - INFO - Storage service initialized
+2025-10-05 19:42:07,346 - __main__ - ERROR - Failed to initialize application: 'NoneType' object is not callable
+2025-10-05 19:42:07,346 - root - ERROR - Critical error in PrayerOffline: 'NoneType' object is not callable
+2025-10-05 19:42:07,349 - root - ERROR - Traceback (most recent call last):
+  File "D:\PTime_Flet\prayer_offline\main.py", line 116, in main
+    app = PrayerOfflineApp(page, storage)
+  File "D:\PTime_Flet\prayer_offline\app.py", line 40, in __init__
+    self.prayer_calculator = PrayerTimesCalculator()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+TypeError: 'NoneType' object is not callable
+
+2025-10-05 20:08:47,192 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 20:08:47,192 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 20:08:47,192 - __main__ - INFO - Platform: win32
+2025-10-05 20:08:47,235 - services.storage - INFO - Storage service initialized
+2025-10-05 20:08:47,236 - __main__ - INFO - Storage service initialized
+2025-10-05 20:08:47,457 - services.notifier - INFO - Notification scheduler started
+2025-10-05 20:08:47,457 - services.notifier - INFO - Notification service initialized
+2025-10-05 20:08:47,861 - services.location - INFO - Loaded saved location: 
+2025-10-05 20:08:47,863 - services.location - INFO - Location service initialized
+2025-10-05 20:08:47,863 - app - ERROR - Failed to initialize application: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:47,864 - __main__ - ERROR - Failed to initialize application: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:47,864 - root - ERROR - Critical error in PrayerOffline: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:47,866 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 117, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 74, in initialize
+    self._create_views()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 107, in _create_views
+    self.views["dashboard"] = DashboardView(self)
+                              ~~~~~~~~~~~~~^^^^^^
+TypeError: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+
+2025-10-05 20:08:52,964 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 20:08:52,964 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 20:08:52,964 - __main__ - INFO - Platform: win32
+2025-10-05 20:08:53,025 - services.storage - INFO - Storage service initialized
+2025-10-05 20:08:53,025 - __main__ - INFO - Storage service initialized
+2025-10-05 20:08:53,143 - services.notifier - INFO - Notification scheduler started
+2025-10-05 20:08:53,144 - services.notifier - INFO - Notification service initialized
+2025-10-05 20:08:53,327 - services.location - INFO - Loaded saved location: 
+2025-10-05 20:08:53,328 - services.location - INFO - Location service initialized
+2025-10-05 20:08:53,328 - app - ERROR - Failed to initialize application: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:53,328 - __main__ - ERROR - Failed to initialize application: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:53,328 - root - ERROR - Critical error in PrayerOffline: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+2025-10-05 20:08:53,331 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 117, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 74, in initialize
+    self._create_views()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 107, in _create_views
+    self.views["dashboard"] = DashboardView(self)
+                              ~~~~~~~~~~~~~^^^^^^
+TypeError: DashboardView.__init__() missing 4 required positional arguments: 'storage', 'prayer_calculator', 'notification_service', and 'location_service'
+
+2025-10-05 20:08:54,955 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:15:27,681 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 20:15:27,685 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 20:15:27,685 - __main__ - INFO - Platform: win32
+2025-10-05 20:15:27,740 - services.storage - INFO - Storage service initialized
+2025-10-05 20:15:27,742 - __main__ - INFO - Storage service initialized
+2025-10-05 20:15:27,747 - services.notifier - INFO - Notification scheduler started
+2025-10-05 20:15:27,747 - services.notifier - INFO - Notification service initialized
+2025-10-05 20:15:28,062 - services.location - INFO - Loaded saved location: 
+2025-10-05 20:15:28,062 - services.location - INFO - Location service initialized
+2025-10-05 20:15:28,062 - app - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:28,062 - __main__ - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:28,063 - root - ERROR - Critical error in PrayerOffline: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:28,064 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 117, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 74, in initialize
+    self._create_views()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 108, in _create_views
+    self.views["qibla"] = QiblaView(self)
+                          ~~~~~~~~~^^^^^^
+TypeError: QiblaView.__init__() missing 1 required positional argument: 'storage'
+
+2025-10-05 20:15:31,439 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:15:31,785 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:15:37,149 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 20:15:37,149 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 20:15:37,191 - __main__ - INFO - Platform: win32
+2025-10-05 20:15:37,265 - services.storage - INFO - Storage service initialized
+2025-10-05 20:15:37,265 - __main__ - INFO - Storage service initialized
+2025-10-05 20:15:37,341 - services.notifier - INFO - Notification scheduler started
+2025-10-05 20:15:37,341 - services.notifier - INFO - Notification service initialized
+2025-10-05 20:15:37,570 - services.location - INFO - Loaded saved location: 
+2025-10-05 20:15:37,571 - services.location - INFO - Location service initialized
+2025-10-05 20:15:37,571 - app - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:37,571 - __main__ - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:37,571 - root - ERROR - Critical error in PrayerOffline: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:15:37,575 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 117, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 74, in initialize
+    self._create_views()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 108, in _create_views
+    self.views["qibla"] = QiblaView(self)
+                          ~~~~~~~~~^^^^^^
+TypeError: QiblaView.__init__() missing 1 required positional argument: 'storage'
+
+2025-10-05 20:15:49,231 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:15:49,404 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:15:49,538 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:16:03,316 - __main__ - INFO - Starting PrayerOffline v1.0.0
+2025-10-05 20:16:03,316 - __main__ - INFO - Python version: 3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]
+2025-10-05 20:16:03,317 - __main__ - INFO - Platform: win32
+2025-10-05 20:16:03,668 - services.storage - INFO - Storage service initialized
+2025-10-05 20:16:03,669 - __main__ - INFO - Storage service initialized
+2025-10-05 20:16:03,788 - services.notifier - INFO - Notification scheduler started
+2025-10-05 20:16:03,788 - services.notifier - INFO - Notification service initialized
+2025-10-05 20:16:04,085 - services.location - INFO - Loaded saved location: 
+2025-10-05 20:16:04,086 - services.location - INFO - Location service initialized
+2025-10-05 20:16:04,087 - app - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:16:04,087 - __main__ - ERROR - Failed to initialize application: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:16:04,087 - root - ERROR - Critical error in PrayerOffline: QiblaView.__init__() missing 1 required positional argument: 'storage'
+2025-10-05 20:16:04,097 - root - ERROR - Traceback (most recent call last):
+  File "d:\PTime_Flet\prayer_offline\main.py", line 117, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 74, in initialize
+    self._create_views()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\PTime_Flet\prayer_offline\app.py", line 108, in _create_views
+    self.views["qibla"] = QiblaView(self)
+                          ~~~~~~~~~^^^^^^
+TypeError: QiblaView.__init__() missing 1 required positional argument: 'storage'
+
+2025-10-05 20:18:09,217 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,415 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,499 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,506 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,509 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,581 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,738 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:09,889 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-05 20:18:10,055 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=SystemExit(1)>
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\flet\core\page.py", line 906, in wrapper
+    handler(*args)
+    ~~~~~~~^^^^^^^
+  File "d:\PTime_Flet\prayer_offline\main.py", line 70, in <lambda>
+    ft.TextButton("Close", on_click=lambda _: sys.exit(1))
+                                              ~~~~~~~~^^^
+SystemExit: 1
+2025-10-25 23:42:33,443 - __main__ - INFO - ============================================================
+2025-10-25 23:42:33,443 - __main__ - INFO - 🚀 Launching PrayerOffline...
+2025-10-25 23:42:33,444 - __main__ - INFO - ============================================================
+2025-10-25 23:42:33,574 - flet - INFO - Assets path configured: D:\PTime_Flet\prayer_offline\assets
+2025-10-25 23:42:33,577 - flet - INFO - Starting up TCP server on localhost:4864
+2025-10-25 23:42:33,586 - flet - INFO - Flet app has started...
+2025-10-25 23:42:33,593 - flet - INFO - App URL: tcp://localhost:4864
+2025-10-25 23:42:33,593 - flet_desktop - INFO - Starting Flet View app...
+2025-10-25 23:42:33,596 - flet_desktop - INFO - Looking for Flet executable at: D:\PTime_Flet\prayer_offline\venv\Lib\site-packages\flet_desktop\app\flet\flet.exe
+2025-10-25 23:42:33,598 - flet_desktop - INFO - Flet View found in: D:\PTime_Flet\prayer_offline\venv\Lib\site-packages\flet_desktop\app\flet\flet.exe
+2025-10-25 23:42:34,156 - flet - INFO - App session started
+2025-10-25 23:42:34,333 - services.storage - INFO - Database initialized successfully
+2025-10-25 23:42:34,337 - services.storage - INFO - Loaded 17 settings from file
+2025-10-25 23:42:34,339 - services.storage - INFO - Storage initialized at: C:\Users\Admin\.prayer_offline
+2025-10-25 23:42:34,340 - app - WARNING - Failed to apply theme, using system default: 'StorageService' object has no attribute 'get_settings'
+2025-10-25 23:42:34,346 - app - INFO - PrayerOfflineApp instance created
+2025-10-25 23:42:34,350 - app - INFO - Initializing PrayerOffline application...
+2025-10-25 23:42:34,353 - services.location - INFO - Location Service initialized
+2025-10-25 23:42:34,353 - app - INFO - ✓ Location service initialized
+2025-10-25 23:42:34,354 - services.audio_player - INFO - Audio assets path: D:\PTime_Flet\prayer_offline\assets\audio
+2025-10-25 23:42:34,356 - services.audio_player - INFO - Found audio file: adhan.mp3
+2025-10-25 23:42:34,357 - services.audio_player - INFO - Found audio file: notification.mp3
+2025-10-25 23:42:34,357 - app - INFO - ✓ Audio player initialized
+2025-10-25 23:42:34,361 - app - INFO - ✓ Notification service initialized
+2025-10-25 23:42:34,402 - app - ERROR - Failed to initialize views: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)
+Traceback (most recent call last):
+  File "D:\PTime_Flet\prayer_offline\app.py", line 130, in _initialize_views
+    from views.dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\__init__.py", line 17, in <module>
+    from .dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\dashboard_view.py", line 17, in <module>
+    from services.praytimes import PrayerTimesCalculator
+ImportError: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)
+2025-10-25 23:42:34,411 - app - ERROR - Failed to initialize application: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)
+Traceback (most recent call last):
+  File "D:\PTime_Flet\prayer_offline\app.py", line 85, in initialize
+    self._initialize_views()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\PTime_Flet\prayer_offline\app.py", line 130, in _initialize_views
+    from views.dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\__init__.py", line 17, in <module>
+    from .dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\dashboard_view.py", line 17, in <module>
+    from services.praytimes import PrayerTimesCalculator
+ImportError: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)
+2025-10-25 23:42:34,420 - __main__ - CRITICAL - Fatal error starting application: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)
+Traceback (most recent call last):
+  File "D:\PTime_Flet\prayer_offline\main.py", line 44, in main
+    app.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "D:\PTime_Flet\prayer_offline\app.py", line 85, in initialize
+    self._initialize_views()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\PTime_Flet\prayer_offline\app.py", line 130, in _initialize_views
+    from views.dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\__init__.py", line 17, in <module>
+    from .dashboard_view import DashboardView
+  File "D:\PTime_Flet\prayer_offline\views\dashboard_view.py", line 17, in <module>
+    from services.praytimes import PrayerTimesCalculator
+ImportError: cannot import name 'PrayerTimesCalculator' from 'services.praytimes' (D:\PTime_Flet\prayer_offline\services\praytimes.py)

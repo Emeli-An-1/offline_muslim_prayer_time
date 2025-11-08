@@ -1,0 +1,251 @@
+# ============================================================================
+# PrayerOffline - Flet Build Configuration
+# ============================================================================
+# Build commands:
+#   Desktop: flet build desktop --build-config config/build_config.yaml
+#   Android: flet build apk --build-config config/build_config.yaml
+#   iOS:     flet build ipa --build-config config/build_config.yaml
+#   Web:     flet build web --build-config config/build_config.yaml
+
+# ============================================================================
+# App Metadata
+# ============================================================================
+app:
+  name: "PrayerOffline"
+  display_name: "Prayer Offline"
+  description: "Privacy-first offline Muslim prayer times application"
+  version: "1.0.0"
+  build_number: "1"
+  author: "PrayerOffline Contributors"
+  author_url: "https://github.com/prayeroffline"
+  homepage_url: "https://github.com/prayeroffline/prayeroffline"
+
+# ============================================================================
+# Windows Desktop Build
+# ============================================================================
+windows:
+  icon: "assets/icons/app_icon.png"
+  title: "PrayerOffline"
+  display_name: "Prayer Offline"
+  target_height: 900
+  target_width: 1200
+  minimum_height: 600
+  minimum_width: 800
+
+# ============================================================================
+# macOS Desktop Build
+# ============================================================================
+macos:
+  icon: "assets/icons/app_icon.png"
+  display_name: "Prayer Offline"
+  bundle_id: "com.prayeroffline.app"
+  category: "Utilities"
+  build_number: "1"
+
+# ============================================================================
+# Linux Desktop Build
+# ============================================================================
+linux:
+  icon: "assets/icons/app_icon.png"
+  display_name: "Prayer Offline"
+  target_height: 900
+  target_width: 1200
+  minimum_height: 600
+  minimum_width: 800
+
+# ============================================================================
+# Android Mobile Build
+# ============================================================================
+android:
+  # Package identifier
+  package: "com.prayeroffline.app"
+  accept_sdk_license: true
+  
+  # Icons and branding
+  icon: "assets/icons/app_icon.png"
+  adaptive_icon_foreground: "assets/icons/app_icon_foreground.png"
+  adaptive_icon_monochrome: "assets/icons/app_icon_monochrome.png"
+  adaptive_icon_background: "#FFFFFF"
+  
+  # App configuration
+  version_code: 1
+  version_name: "1.0.0"
+  min_sdk_version: 21
+  target_sdk_version: 33
+  
+  # Orientation
+  orientation: "portrait"
+  
+  # Required permissions for prayer times, location, and notifications
+  permissions:
+    # Core functionality
+    - "android.permission.ACCESS_FINE_LOCATION"
+    - "android.permission.ACCESS_COARSE_LOCATION"
+    - "android.permission.INTERNET"
+    
+    # Notifications
+    - "android.permission.POST_NOTIFICATIONS"
+    - "android.permission.ACCESS_NOTIFICATION_POLICY"
+    
+    # Alarms and scheduling
+    - "android.permission.SCHEDULE_EXACT_ALARM"
+    - "android.permission.SET_ALARM"
+    - "android.permission.RECEIVE_BOOT_COMPLETED"
+    
+    # Device features
+    - "android.permission.VIBRATE"
+    - "android.permission.WAKE_LOCK"
+    
+    # File access (for import/export)
+    - "android.permission.READ_EXTERNAL_STORAGE"
+    - "android.permission.WRITE_EXTERNAL_STORAGE"
+  
+  # Features
+  features:
+    - name: "android.hardware.location"
+      required: false
+    - name: "android.hardware.location.gps"
+      required: false
+    - name: "android.hardware.sensor.compass"
+      required: false
+    - name: "android.hardware.vibrator"
+      required: false
+  
+  # Gradle build options
+  gradle_dependencies:
+    - "androidx.work:work-runtime:2.8.1"
+  
+  # Changelog
+  release_notes: "Version 1.0.0 - Initial release"
+
+# ============================================================================
+# iOS Mobile Build
+# ============================================================================
+ios:
+  # Bundle identifier
+  bundle_id: "com.prayeroffline.app"
+  
+  # Icons
+  icon: "assets/icons/app_icon.png"
+  
+  # Version
+  version: "1.0.0"
+  build_number: "1"
+  
+  # Development team (required for actual builds)
+  # team_id: "YOUR_TEAM_ID"
+  # code_sign_identity: "iPhone Developer"
+  
+  # Deployment target
+  minimum_os_version: "12.0"
+  
+  # Required device capabilities
+  requires_device_capabilities:
+    - location-services
+    - gps
+    - compass
+  
+  # Info.plist configuration
+  info_plist:
+    NSLocationWhenInUseUsageDescription: "PrayerOffline needs your location to calculate accurate prayer times"
+    NSLocationAlwaysAndWhenInUseUsageDescription: "PrayerOffline needs your location for prayer time notifications"
+    NSMotionUsageDescription: "PrayerOffline uses motion sensors to help calibrate the Qibla compass"
+    UIRequiredDeviceCapabilities:
+      - location-services
+      - gps
+      - compass
+  
+  # Orientation
+  orientation: "portrait"
+
+# ============================================================================
+# Web Build
+# ============================================================================
+web:
+  # Routing strategy
+  route_url_strategy: "hash"
+  
+  # Enable color emoji support
+  use_color_emoji: true
+  
+  # Service worker
+  service_worker: "web/service_worker.js"
+  
+  # PWA manifest
+  web_app_manifest:
+    name: "PrayerOffline"
+    short_name: "Prayer Times"
+    description: "Privacy-first offline Muslim prayer times"
+    display: "standalone"
+    start_url: "/"
+    scope: "/"
+    background_color: "#FFFFFF"
+    theme_color: "#1F6DEF"
+    orientation: "portrait-primary"
+
+# ============================================================================
+# Build Options
+# ============================================================================
+build:
+  # Strip debug symbols from release builds
+  strip_symbols: true
+  
+  # Optimize for size
+  split_per_abi: true
+  
+  # Archive format
+  archive_prefix: "prayeroffline"
+
+# ============================================================================
+# Signing Configuration (Android Release)
+# ============================================================================
+# Uncomment and configure for release builds:
+# android:
+#   signing:
+#     key_store_file: "path/to/keystore.jks"
+#     key_store_password: "your_keystore_password"
+#     key_alias: "your_key_alias"
+#     key_password: "your_key_password"
+
+# ============================================================================
+# Development Configuration
+# ============================================================================
+# Override for development builds:
+# app:
+#   version: "1.0.0-dev"
+# 
+# android:
+#   package: "com.prayeroffline.dev"
+# 
+# ios:
+#   bundle_id: "com.prayeroffline.dev"
+
+# ============================================================================
+# Build Profiles
+# ============================================================================
+# Use with: flet build apk --profile development
+# 
+# profiles:
+#   development:
+#     android:
+#       package: "com.prayeroffline.dev"
+#     ios:
+#       bundle_id: "com.prayeroffline.dev"
+#     app:
+#       version: "1.0.0-dev"
+#   
+#   staging:
+#     android:
+#       package: "com.prayeroffline.staging"
+#     ios:
+#       bundle_id: "com.prayeroffline.staging"
+#     app:
+#       version: "1.0.0-staging"
+#   
+#   production:
+#     android:
+#       package: "com.prayeroffline.app"
+#     ios:
+#       bundle_id: "com.prayeroffline.app"
+#     app:
+#       version: "1.0.0"

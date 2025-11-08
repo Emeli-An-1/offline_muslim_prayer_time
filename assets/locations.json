@@ -1,0 +1,139 @@
+{
+  "countries": [
+    {
+      "name": "United States",
+      "code": "US",
+      "cities": [
+        {"name": "New York", "lat": 40.7128, "lng": -74.0060, "timezone": "America/New_York"},
+        {"name": "Los Angeles", "lat": 34.0522, "lng": -118.2437, "timezone": "America/Los_Angeles"},
+        {"name": "Chicago", "lat": 41.8781, "lng": -87.6298, "timezone": "America/Chicago"}
+      ]
+    },
+    {
+      "name": "United Kingdom",
+      "code": "GB",
+      "cities": [
+        {"name": "London", "lat": 51.5074, "lng": -0.1278, "timezone": "Europe/London"},
+        {"name": "Manchester", "lat": 53.4808, "lng": -2.2426, "timezone": "Europe/London"},
+        {"name": "Birmingham", "lat": 52.4862, "lng": -1.8904, "timezone": "Europe/London"}
+      ]
+    },
+    {
+      "name": "Saudi Arabia",
+      "code": "SA",
+      "cities": [
+        {"name": "Mecca", "lat": 21.4225, "lng": 39.8262, "timezone": "Asia/Riyadh"},
+        {"name": "Medina", "lat": 24.5247, "lng": 39.5692, "timezone": "Asia/Riyadh"},
+        {"name": "Riyadh", "lat": 24.7136, "lng": 46.6753, "timezone": "Asia/Riyadh"}
+      ]
+    },
+    {
+      "name": "Pakistan",
+      "code": "PK",
+      "cities": [
+        {"name": "Karachi", "lat": 24.8607, "lng": 67.0011, "timezone": "Asia/Karachi"},
+        {"name": "Lahore", "lat": 31.5204, "lng": 74.3587, "timezone": "Asia/Karachi"},
+        {"name": "Islamabad", "lat": 33.6844, "lng": 73.0479, "timezone": "Asia/Karachi"}
+      ]
+    },
+    {
+      "name": "India",
+      "code": "IN",
+      "cities": [
+        {"name": "Delhi", "lat": 28.7041, "lng": 77.1025, "timezone": "Asia/Kolkata"},
+        {"name": "Mumbai", "lat": 19.0760, "lng": 72.8777, "timezone": "Asia/Kolkata"},
+        {"name": "Bangalore", "lat": 12.9716, "lng": 77.5946, "timezone": "Asia/Kolkata"}
+      ]
+    },
+    {
+      "name": "Turkmenistan",
+      "code": "TM",
+      "has_provinces": true,
+      "provinces": [
+        {
+          "name": "Ashgabat City",
+          "code": "AS",
+          "description": "Capital city (independent city status)",
+          "cities": [
+            {"name": "Ashgabat", "lat": 37.9601, "lng": 58.3261, "timezone": "Asia/Ashgabat"}
+          ]
+        },
+        {
+          "name": "Ahal Province",
+          "code": "A",
+          "description": "Central province",
+          "cities": [
+            {"name": "Arkadag", "lat": 38.0833, "lng": 58.1833, "timezone": "Asia/Ashgabat"},
+            {"name": "Tejen", "lat": 37.3786, "lng": 60.4958, "timezone": "Asia/Ashgabat"},
+            {"name": "Abadan", "lat": 38.0500, "lng": 58.2000, "timezone": "Asia/Ashgabat"},
+            {"name": "Annau", "lat": 38.0333, "lng": 58.5167, "timezone": "Asia/Ashgabat"},
+            {"name": "Ak Bugday", "lat": 38.2000, "lng": 58.1667, "timezone": "Asia/Ashgabat"},
+            {"name": "Babadayhan", "lat": 38.7833, "lng": 56.5167, "timezone": "Asia/Ashgabat"},
+            {"name": "Gökdepe", "lat": 38.1500, "lng": 58.1833, "timezone": "Asia/Ashgabat"},
+            {"name": "Kaka", "lat": 37.3500, "lng": 59.6167, "timezone": "Asia/Ashgabat"},
+            {"name": "Sarahs", "lat": 36.5333, "lng": 61.2167, "timezone": "Asia/Ashgabat"}
+          ]
+        },
+        {
+          "name": "Balkan Province",
+          "code": "B",
+          "description": "Western province (Caspian coast)",
+          "cities": [
+            {"name": "Balkanabat", "lat": 39.5108, "lng": 54.3671, "timezone": "Asia/Ashgabat"},
+            {"name": "Türkmenbaşy", "lat": 40.0225, "lng": 52.9553, "timezone": "Asia/Ashgabat"},
+            {"name": "Gyzylarbat", "lat": 38.9667, "lng": 56.2833, "timezone": "Asia/Ashgabat"},
+            {"name": "Bereket", "lat": 39.2333, "lng": 55.5167, "timezone": "Asia/Ashgabat"},
+            {"name": "Esenguly", "lat": 39.1833, "lng": 53.5333, "timezone": "Asia/Ashgabat"},
+            {"name": "Gumdag", "lat": 39.2047, "lng": 54.5881, "timezone": "Asia/Ashgabat"},
+            {"name": "Magtymguly", "lat": 39.6667, "lng": 54.3667, "timezone": "Asia/Ashgabat"},
+            {"name": "Hazar", "lat": 39.4333, "lng": 53.0667, "timezone": "Asia/Ashgabat"}
+          ]
+        },
+        {
+          "name": "Dashoguz Province",
+          "code": "D",
+          "description": "Northern province",
+          "cities": [
+            {"name": "Daşoguz", "lat": 41.8367, "lng": 59.9667, "timezone": "Asia/Ashgabat"},
+            {"name": "Köneürgench", "lat": 42.3250, "lng": 59.1542, "timezone": "Asia/Ashgabat"},
+            {"name": "Akdepe", "lat": 42.0667, "lng": 59.3833, "timezone": "Asia/Ashgabat"},
+            {"name": "Boldumsaz", "lat": 41.6667, "lng": 63.1667, "timezone": "Asia/Ashgabat"},
+            {"name": "Görogly", "lat": 41.5333, "lng": 60.3167, "timezone": "Asia/Ashgabat"},
+            {"name": "Gubadag", "lat": 41.4000, "lng": 60.2667, "timezone": "Asia/Ashgabat"},
+            {"name": "Shabat", "lat": 41.8833, "lng": 60.3500, "timezone": "Asia/Ashgabat"},
+            {"name": "Yylanly", "lat": 41.7667, "lng": 60.6833, "timezone": "Asia/Ashgabat"}
+          ]
+        },
+        {
+          "name": "Lebap Province",
+          "code": "L",
+          "description": "Eastern province",
+          "cities": [
+            {"name": "Türkmenabat", "lat": 39.0933, "lng": 63.5784, "timezone": "Asia/Ashgabat"},
+            {"name": "Atamyrat", "lat": 37.8333, "lng": 65.2167, "timezone": "Asia/Ashgabat"},
+            {"name": "Magdanly", "lat": 37.6333, "lng": 62.1000, "timezone": "Asia/Ashgabat"},
+            {"name": "Yolöten", "lat": 37.3000, "lng": 62.3500, "timezone": "Asia/Ashgabat"},
+            {"name": "Gazojak", "lat": 41.1833, "lng": 61.4000, "timezone": "Asia/Ashgabat"},
+            {"name": "Farap", "lat": 39.1833, "lng": 63.6000, "timezone": "Asia/Ashgabat"},
+            {"name": "Döwletli", "lat": 37.8667, "lng": 64.9667, "timezone": "Asia/Ashgabat"},
+            {"name": "Seýdi", "lat": 39.4667, "lng": 62.9167, "timezone": "Asia/Ashgabat"},
+            {"name": "Dänew", "lat": 37.5167, "lng": 64.2500, "timezone": "Asia/Ashgabat"}
+          ]
+        },
+        {
+          "name": "Mary Province",
+          "code": "M",
+          "description": "Southern province",
+          "cities": [
+            {"name": "Mary", "lat": 37.5942, "lng": 61.8306, "timezone": "Asia/Ashgabat"},
+            {"name": "Baýramaly", "lat": 37.6181, "lng": 62.1697, "timezone": "Asia/Ashgabat"},
+            {"name": "Serhetabat", "lat": 35.2833, "lng": 62.3500, "timezone": "Asia/Ashgabat"},
+            {"name": "Sakar", "lat": 36.4667, "lng": 63.1833, "timezone": "Asia/Ashgabat"},
+            {"name": "Oguzhan", "lat": 37.9000, "lng": 61.8167, "timezone": "Asia/Ashgabat"},
+            {"name": "Wekilbazar", "lat": 37.7500, "lng": 61.5167, "timezone": "Asia/Ashgabat"}
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: prayer-times
+Version: 1
+Summary: Prayer times calculation
+Home-page: https://pypi.org/project/prayer-times/
+Author: Unknown
+Requires-Dist: requests
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary

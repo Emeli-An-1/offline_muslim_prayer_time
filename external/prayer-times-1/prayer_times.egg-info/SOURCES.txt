@@ -1,0 +1,7 @@
+praytimes.py
+setup.py
+prayer_times.egg-info/PKG-INFO
+prayer_times.egg-info/SOURCES.txt
+prayer_times.egg-info/dependency_links.txt
+prayer_times.egg-info/requires.txt
+prayer_times.egg-info/top_level.txt
