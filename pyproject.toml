@@ -1,0 +1,212 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prayer-offline"
+version = "1.0.0"
+description = "Privacy-first offline Muslim prayer times application with Qibla compass, Tasbih counter, and Islamic calendar"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "PrayerOffline Contributors", email = "support@prayeroffline.app"}
+]
+maintainers = [
+    {name = "PrayerOffline Team", email = "team@prayeroffline.app"}
+]
+keywords = [
+    "islam",
+    "prayer",
+    "salah",
+    "muslim",
+    "qibla",
+    "tasbih",
+    "hijri",
+    "offline",
+    "flet",
+    "mobile"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Mobile",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Arabic",
+    "Natural Language :: English",
+    "Natural Language :: French",
+    "Natural Language :: Urdu",
+    "Operating System :: Android",
+    "Operating System :: iOS",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Religion",
+    "Topic :: Multimedia",
+    "Typing :: Typed"
+]
+
+dependencies = [
+    "flet>=0.21.0",
+    "plyer>=2.1.0",
+    "prayer-times>=0.3.0",
+    "hijri-converter>=2.3.1",
+    "pytz>=2023.3",
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0"
+]
+
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0"
+]
+
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0"
+]
+
+# Optional platform-specific features
+audio = [
+    "pydub>=0.25.1"
+]
+
+geolocation = [
+    "geopy>=2.3.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/prayeroffline/prayeroffline"
+Repository = "https://github.com/prayeroffline/prayeroffline.git"
+Documentation = "https://prayeroffline.readthedocs.io"
+Issues = "https://github.com/prayeroffline/prayeroffline/issues"
+Changelog = "https://github.com/prayeroffline/prayeroffline/releases"
+
+[tool.hatch.version]
+path = "prayer_offline/__init__.py"
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+py_version = 310
+skip_gitignore = true
+known_first_party = ["prayer_offline"]
+known_third_party = ["flet", "plyer", "pydantic"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_equality = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "flet",
+    "plyer",
+    "prayer_times",
+    "hijri_converter"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers --tb=short --cov=prayer_offline --cov-report=term-missing --cov-report=html --cov-report=xml"
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow running tests",
+    "ui: UI component tests",
+    "prayer_times: Prayer time calculation tests",
+    "location: Location service tests",
+    "storage: Storage and persistence tests",
+    "notification: Notification system tests"
+]
+
+[tool.coverage.run]
+source = ["prayer_offline"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__main__.py",
+    "*/__init__.py"
+]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "pass",
+    "..."
+]
+precision = 2
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.pylint]
+max-line-length = 100
+disable = [
+    "C0111",  # Missing docstring
+    "C0103",  # Invalid name
+    "R0913",  # Too many arguments
+    "R0914"   # Too many local variables
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "test_*.py"]
+skips = ["B101"]  # assert_used
+
+[tool.pydantic]
+json_schema_extra = {}

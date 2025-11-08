@@ -1,0 +1,77 @@
+# ============================================================================
+# PrayerOffline - Production Dependencies
+# ============================================================================
+# Python 3.10+
+# Install: pip install -r requirements.txt
+
+# ============================================================================
+# Core UI Framework
+# ============================================================================
+flet>=0.21.0                    # Flet - Cross-platform UI framework
+
+# ============================================================================
+# Device & System Integration
+# ============================================================================
+plyer>=2.1.0                    # Platform-specific APIs (location, vibration, sensors)
+
+# ============================================================================
+# Prayer Time Calculation
+# ============================================================================
+prayer-times>=0.3.0             # Islamic prayer times calculation
+hijri-converter>=2.3.1          # Hijri calendar conversion
+pytz>=2023.3                    # Timezone handling
+
+# ============================================================================
+# Data Validation & Serialization
+# ============================================================================
+pydantic>=2.0.0                 # Data validation and serialization
+
+# ============================================================================
+# Utilities
+# ============================================================================
+typing-extensions>=4.0.0        # Type hints backport for older Python versions
+
+# ============================================================================
+# Development & Testing Dependencies
+# ============================================================================
+# Run tests: pytest tests/
+pytest>=7.0.0                   # Testing framework
+pytest-cov>=4.0.0               # Coverage reporting for tests
+
+# Code Quality
+black>=23.0.0                   # Code formatter (opinionated)
+isort>=5.12.0                   # Import statement organizer
+flake8>=6.0.0                   # Style guide enforcement
+mypy>=1.0.0                     # Static type checker
+
+# ============================================================================
+# Optional Dependencies (uncomment if needed)
+# ============================================================================
+# For advanced audio processing
+# librosa>=0.10.0
+
+# For Qibla calculation with higher precision
+# geopy>=2.3.0
+
+# For database migration
+# alembic>=1.11.0
+
+# ============================================================================
+# Notes
+# ============================================================================
+# - sqlite3 is built-in to Python, no installation needed
+# - flet will handle platform-specific dependencies
+# - plyer handles GPS, vibration, sensors across platforms
+# - For production builds, use: pip install -r requirements.txt --no-cache-dir
+flet>=0.21.0
+plyer>=2.1.0
+hijri-converter>=2.3.1
+pytz>=2024.1
+python-dateutil>=2.8.2
+pydantic>=2.5.0
+APScheduler>=3.10.4
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+isort>=5.12.0

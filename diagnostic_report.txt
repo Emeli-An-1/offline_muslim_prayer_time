@@ -1,0 +1,1432 @@
+======================================================================
+PrayerOffline - Project Diagnostic Report
+======================================================================
+
+Timestamp: 2025-10-14T12:28:48.852079
+Project Root: D:\PTime_Flet\prayer_offline
+
+SUMMARY
+----------------------------------------------------------------------
+Total Files Scanned: 43
+Total Issues Found: 282
+  - Errors: 9
+  - Warnings: 0
+  - Info: 273
+Fixes Applied: 0
+
+DETAILED ISSUES
+----------------------------------------------------------------------
+
+❌ [ERROR] forbidden_api
+   File: auto_fixer.py
+   Line: 37
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: auto_fixer.py
+   Line: 38
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: auto_fixer.py
+   Line: 185
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: auto_fixer.py
+   Line: 203
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: auto_fixer.py
+   Line: 212
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: diagnose.py
+   Line: 196
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: diagnose.py
+   Line: 198
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] forbidden_api
+   File: diagnose.py
+   Line: 204
+   Message: localStorage/sessionStorage not supported in Flet. Use in-memory storage.
+
+❌ [ERROR] syntax
+   File: views\tasbih_view.py
+   Line: 79
+   Message: Syntax error: invalid syntax
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 23
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 26
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 30
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 34
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 38
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 41
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 89
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 96
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 97
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 100
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 101
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 105
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 141
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 179
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 204
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 205
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 212
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 216
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 217
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 218
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 219
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 223
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 226
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 228
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 230
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 253
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 258
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 273
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 274
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 276
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: auto_fixer.py
+   Line: 277
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 15
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 18
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 21
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 24
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 27
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 34
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 37
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 41
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 42
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 43
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 48
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 49
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 62
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 63
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 77
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 78
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 92
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 93
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 105
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 106
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 118
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 119
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 130
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 131
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 147
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 148
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 158
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 160
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 161
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 163
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 164
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 165
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 166
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 167
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: check_imports.py
+   Line: 168
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 74
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 77
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 81
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 85
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 89
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 93
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 97
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 100
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 427
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 428
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 429
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 430
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 431
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 432
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 433
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 434
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 435
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 436
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 439
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 441
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 443
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 448
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose.py
+   Line: 464
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] todo
+   File: diagnose.py
+   Line: 338
+   Message: Unresolved: # Check for TODO/FIXME comments
+
+ℹ️ [INFO] todo
+   File: diagnose.py
+   Line: 340
+   Message: Unresolved: if 'TODO' in line or 'FIXME' in line:
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 11
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 12
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 13
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 22
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 25
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 29
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 34
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 37
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 40
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 42
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 45
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 47
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 50
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 55
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 59
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 62
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 65
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 76
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 78
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 80
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 85
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 90
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 91
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 92
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 100
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 106
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 108
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 109
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: diagnose_views.py
+   Line: 110
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 58
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 59
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 62
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 66
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 74
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 81
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 82
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 85
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 89
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 98
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 109
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 110
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 111
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 116
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 117
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 121
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 122
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 126
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 127
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 133
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 134
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 140
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 141
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 145
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 146
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 147
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 148
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 149
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 150
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 151
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 152
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_flet_case.py
+   Line: 153
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 48
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 50
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 53
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 57
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 66
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 118
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 120
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 123
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 127
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 132
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 133
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 134
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 139
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 140
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 148
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 149
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 153
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 154
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 155
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_imports.py
+   Line: 156
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 44
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 46
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 49
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 53
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 62
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 94
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 96
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 99
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 103
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 108
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 109
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 110
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 115
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 116
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 125
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 126
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 131
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 132
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 140
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 141
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 142
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 143
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 144
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 145
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 146
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: fix_usercontrol.py
+   Line: 147
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: main.py
+   Line: 26
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: main.py
+   Line: 27
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: main.py
+   Line: 215
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: main.py
+   Line: 218
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 12
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 19
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 97
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 104
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 110
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 120
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 126
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 127
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 128
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 131
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 138
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 142
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 153
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 154
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 155
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 156
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 157
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: quick_fix.py
+   Line: 158
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 18
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 21
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 30
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 34
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 35
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 36
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 37
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 38
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 39
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 46
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 47
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 55
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 57
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 59
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 61
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 64
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 72
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 73
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 76
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 77
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 80
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 81
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 84
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 85
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 88
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 89
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 92
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 93
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 94
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 97
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 98
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 101
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 102
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 103
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 104
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 105
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 106
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 111
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 121
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 124
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 135
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 169
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 171
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 174
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 177
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 178
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 182
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 188
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 200
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 206
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 212
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 213
+   Message: Consider using logging instead of print()
+
+ℹ️ [INFO] best_practice
+   File: syntax_inspector.py
+   Line: 215
+   Message: Consider using logging instead of print()
+
+======================================================================
+End of Report
+======================================================================
