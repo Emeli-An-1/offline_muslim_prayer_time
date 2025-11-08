@@ -1,0 +1,672 @@
+"""
+Advanced Tasbih Counter View
+- Multiple counters (Subhanallah, Alhamdulillah, Allahu Akbar)
+- Target-based counting (33, 99, 100, 1000, custom)
+- Visual progress indicators (circular progress bar)
+- Sound effects and vibration feedback (configurable)
+- Session history and daily/weekly statistics
+- Reset confirmation to prevent accidental resets
+- Gesture support: Swipe to switch dhikr, long-press to reset
+"""
+
+import flet as ft
+from typing import Dict, List, Optional, Callable
+from datetime import datetime, timedelta
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class DhikrCounter:
+    """Individual dhikr counter with history tracking"""
+    
+    def __init__(self, name: str, arabic: str, target: int = 33):
+        """
+        Initialize a dhikr counter
+        
+        Args:
+            name: Display name (e.g., "Subhanallah")
+            arabic: Arabic text for dhikr
+            target: Target count
+        """
+        self.name = name
+        self.arabic = arabic
+        self.target = target
+        self.current_count = 0
+        self.sessions = []  # List of session histories
+        self.started_at = None
+
+    def increment(self) -> None:
+        """Increment counter"""
+        self.current_count += 1
+        if self.started_at is None:
+            self.started_at = datetime.now()
+
+    def reset(self) -> None:
+        """Reset counter and save session"""
+        if self.current_count > 0:
+            session = {
+                "count": self.current_count,
+                "target": self.target,
+                "timestamp": self.started_at.isoformat() if self.started_at else datetime.now().isoformat(),
+                "duration_seconds": (datetime.now() - self.started_at).total_seconds() if self.started_at else 0
+            }
+            self.sessions.append(session)
+        
+        self.current_count = 0
+        self.started_at = None
+
+    def set_target(self, new_target: int) -> None:
+        """Update target count"""
+        self.target = new_target
+
+    def get_progress_percent(self) -> float:
+        """Get progress percentage (0-100)"""
+        if self.target <= 0:
+            return 0
+        return min(100, (self.current_count / self.target) * 100)
+
+    def is_target_reached(self) -> bool:
+        """Check if target count reached"""
+        return self.current_count >= self.target
+
+    def get_daily_stats(self) -> Dict:
+        """Get today's statistics"""
+        today = datetime.now().date()
+        today_sessions = [
+            s for s in self.sessions
+            if datetime.fromisoformat(s["timestamp"]).date() == today
+        ]
+        
+        return {
+            "sessions_count": len(today_sessions),
+            "total_count": sum(s["count"] for s in today_sessions),
+            "total_time": sum(s["duration_seconds"] for s in today_sessions)
+        }
+
+    def get_weekly_stats(self) -> Dict:
+        """Get this week's statistics"""
+        today = datetime.now().date()
+        week_start = today - timedelta(days=today.weekday())
+        week_end = week_start + timedelta(days=6)
+        
+        week_sessions = [
+            s for s in self.sessions
+            if week_start <= datetime.fromisoformat(s["timestamp"]).date() <= week_end:
+        ]
+        
+        return {
+            "sessions_count": len(week_sessions),
+            "total_count": sum(s["count"] for s in week_sessions),
+            "total_time": sum(s["duration_seconds"] for s in week_sessions),
+            "average_per_session": sum(s["count"] for s in week_sessions) / len(week_sessions) if week_sessions else 0
+        }
+
+    def to_dict(self) -> Dict:
+        """Serialize to dictionary"""
+        return {
+            "name": self.name,
+            "arabic": self.arabic,
+            "target": self.target,
+            "current_count": self.current_count,
+            "sessions": self.sessions,
+            "started_at": self.started_at.isoformat() if self.started_at else None
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> "DhikrCounter":
+        """Deserialize from dictionary"""
+        counter = cls(data["name"], data["arabic"], data["target"])
+        counter.current_count = data.get("current_count", 0)
+        counter.sessions = data.get("sessions", [])
+        if data.get("started_at"):
+            counter.started_at = datetime.fromisoformat(data["started_at"])
+        return counter
+
+
+class TasbihView:
+    """
+    Advanced Tasbih counter with multiple dhikrs, progress tracking, and statistics
+    """
+    
+    # Default dhikrs with Arabic text
+    DEFAULT_DHIKRS = [
+        {
+            "name": "Subhanallah",
+            "arabic": "سُبْحَانَ اللَّهِ",
+            "transliteration": "Glory be to Allah",
+            "target": 33
+        },
+        {
+            "name": "Alhamdulillah",
+            "arabic": "الْحَمْدُ لِلَّهِ",
+            "transliteration": "Praise be to Allah",
+            "target": 33
+        },
+        {
+            "name": "Allahu Akbar",
+            "arabic": "اللَّهُ أَكْبَرُ",
+            "transliteration": "Allah is the Greatest",
+            "target": 33
+        },
+        {
+            "name": "La ilaha illallah",
+            "arabic": "لَا إِلَهَ إِلَّا اللَّهُ",
+            "transliteration": "There is no deity except Allah",
+            "target": 1
+        }
+    ]
+    
+    TARGET_PRESETS = [33, 99, 100, 1000]
+    
+    def __init__(:
+        self,
+        page: ft.Page,
+        storage_service,
+        audio_service=None,
+        on_counter_change: Optional[Callable] = None,
+        i18n_strings: Dict = None
+    ):
+        """
+        Initialize Tasbih View
+        
+        Args:
+            page: Flet page instance
+            storage_service: Storage service for persistence
+            audio_service: Optional audio service for counter sound
+            on_counter_change: Callback when counter updates
+            i18n_strings: Internationalization strings
+        """
+        super().__init__()
+        self.page = page
+        self.storage = storage_service
+        self.audio = audio_service
+        self.on_counter_change = on_counter_change
+        self.strings = i18n_strings or {}
+        
+        # State management
+        self.counters: Dict[str, DhikrCounter] = {}
+        self.current_dhikr_index = 0
+        self.vibration_enabled = True
+        self.sound_enabled = True
+        
+        self._initialize_counters()
+        
+        # UI components (initialized in build)
+        self.dhikr_display = None
+        self.count_display = None
+        self.progress_indicator = None
+        self.stats_text = None
+        self.counter_tabs = None
+
+    def _initialize_counters(self):
+        """Initialize or load counters from storage"""
+        try:
+            saved_data = self.storage.get("tasbih_counters", None)
+            if saved_data:
+                for dhikr_data in saved_data:
+                    counter = DhikrCounter.from_dict(dhikr_data)
+                    self.counters[counter.name] = counter
+                logger.info(f"Loaded {len(self.counters)} counters from storage")
+            else:
+                # Initialize default counters
+                for dhikr in self.DEFAULT_DHIKRS:
+                    self.counters[dhikr["name"]] = DhikrCounter(
+                        dhikr["name"],
+                        dhikr["arabic"],
+                        dhikr["target"]
+                    )
+                logger.info("Initialized default counters")
+        except Exception as e:
+            logger.error(f"Failed to initialize counters: {e}")
+            # Fallback to defaults
+            for dhikr in self.DEFAULT_DHIKRS:
+                self.counters[dhikr["name"]] = DhikrCounter(
+                    dhikr["name"],
+                    dhikr["arabic"],
+                    dhikr["target"]
+                )
+
+    def _save_counters(self):
+        """Persist counters to storage"""
+        try:
+            data = [counter.to_dict() for counter in self.counters.values()]
+            self.storage.set("tasbih_counters", data)
+            logger.info("Counters saved to storage")
+        except Exception as e:
+            logger.error(f"Failed to save counters: {e}")
+
+    def _get_current_counter(self) -> DhikrCounter:
+        """Get currently active counter"""
+        counter_names = list(self.counters.keys())
+        if not counter_names:
+            return None
+        return self.counters[counter_names[self.current_dhikr_index]]
+
+    def _increment_counter(self):
+        """Increment current counter"""
+        counter = self._get_current_counter()
+        if counter:
+            counter.increment()
+            self._save_counters()
+            self._play_sound_feedback()
+            self._play_vibration_feedback()
+            self._update_display()
+            
+            if self.on_counter_change:
+                self.on_counter_change(counter)
+            
+            # Show celebration when target reached
+            if counter.is_target_reached():
+                self._show_target_celebration()
+
+    def _reset_current_counter(self, confirmed: bool = False):
+        """Reset current counter with confirmation"""
+        counter = self._get_current_counter()
+        if not counter:
+            return
+        
+        if not confirmed:
+            self._show_reset_confirmation()
+        else:
+            counter.reset()
+            self._save_counters()
+            self._update_display()
+
+    def _show_reset_confirmation(self):
+        """Show confirmation dialog before reset"""
+        counter = self._get_current_counter()
+        
+        dlg = ft.AlertDialog(
+            title=ft.Text("Reset Counter?"),
+            content=ft.Column(
+                controls=[
+                    ft.Text(f"{counter.name}: {counter.current_count}/{counter.target}"),
+                    ft.Text("This action cannot be undone.", color=ft.Colors.ERROR)
+                ]
+            ),
+            actions=[
+                ft.TextButton("Cancel", on_click=lambda: self._close_dialog(dlg)),
+                ft.TextButton(
+                    "Reset",
+                    style=ft.ButtonStyle(color=ft.Colors.ERROR),
+                    on_click=lambda: (self._reset_current_counter(confirmed=True), self._close_dialog(dlg))
+                )
+            ]
+        )
+        
+        self.page.dialog = dlg
+        dlg.open = True
+        self.page.update()
+
+    def _close_dialog(self, dlg):
+        """Close dialog"""
+        dlg.open = False
+        self.page.update()
+
+    def _switch_to_next_dhikr(self):
+        """Switch to next dhikr (swipe gesture)"""
+        self.current_dhikr_index = (self.current_dhikr_index + 1) % len(self.counters)
+        self._update_display()
+
+    def _switch_to_prev_dhikr(self):
+        """Switch to previous dhikr"""
+        self.current_dhikr_index = (self.current_dhikr_index - 1) % len(self.counters)
+        self._update_display()
+
+    def _play_sound_feedback(self):
+        """Play counter increment sound"""
+        if self.sound_enabled and self.audio:
+            try:
+                self.audio.play_notification()
+            except Exception as e:
+                logger.debug(f"Sound feedback failed: {e}")
+
+    def _play_vibration_feedback(self):
+        """Play vibration feedback"""
+        if self.vibration_enabled:
+            try:
+                # In production, use plyer.vibrator
+                logger.debug("Vibration feedback triggered")
+            except Exception as e:
+                logger.debug(f"Vibration feedback failed: {e}")
+
+    def _show_target_celebration(self):
+        """Show celebration when target reached"""
+        snackbar = ft.SnackBar(
+            content=ft.Row(
+                controls=[
+                    ft.Icon(ft.Icons.CELEBRATION, color=ft.Colors.PRIMARY),
+                    ft.Text("Target Reached! 🎉", size=16)
+                ],
+                spacing=8
+            )
+        )
+        self.page.snack_bar = snackbar
+        snackbar.open = True
+        self.page.update()
+
+    def _set_custom_target(self, new_target: int):
+        """Set custom target for current counter"""
+        counter = self._get_current_counter()
+        if counter:
+            counter.set_target(new_target)
+            self._save_counters()
+            self._update_display()
+
+    def _update_display(self):
+        """Update all UI elements"""
+        counter = self._get_current_counter()
+        if not counter:
+            return
+        
+        if self.dhikr_display:
+            self.dhikr_display.value = counter.arabic
+        if self.count_display:
+            self.count_display.value = f"{counter.current_count}/{counter.target}"
+        if self.progress_indicator:
+            self.progress_indicator.value = counter.get_progress_percent() / 100
+        
+        self._update_stats_display()
+        self.update()
+
+    def _update_stats_display(self):
+        """Update statistics display"""
+        counter = self._get_current_counter()
+        if not counter or not self.stats_text:
+            return
+        
+        daily = counter.get_daily_stats()
+        weekly = counter.get_weekly_stats()
+        
+        stats_content = (
+            f"Today: {daily['sessions_count']} sessions, {daily['total_count']} total\n"
+            f"This Week: {weekly['sessions_count']} sessions, {weekly['total_count']} total\n"
+            f"Weekly Average: {weekly['average_per_session']:.1f} per session"
+        )
+        self.stats_text.value = stats_content
+
+    def _create_counter_card(self) -> ft.Container:
+        """Create main counter display card"""
+        
+        counter = self._get_current_counter()
+        
+        # Dhikr text display
+        self.dhikr_display = ft.Text(
+            value=counter.arabic if counter else "",
+            size=36,
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+            color=ft.Colors.PRIMARY
+        )
+        
+        # Large counter display
+        self.count_display = ft.Text(
+            value=f"{counter.current_count if counter else 0}/{counter.target if counter else 0}",
+            size=48,
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+            color=ft.Colors.ON_SURFACE
+        )
+        
+        # Circular progress indicator
+        self.progress_indicator = ft.ProgressRing(
+            value=counter.get_progress_percent() / 100 if counter else 0,
+            stroke_width=8,
+            size=200,
+            color=ft.Colors.PRIMARY
+        )
+        
+        # Progress ring with counter overlay
+        progress_stack = ft.Stack(
+            controls=[
+                self.progress_indicator,
+                ft.Container(
+                    content=self.count_display,
+                    alignment=ft.alignment.center,
+                    width=200,
+                    height=200
+                )
+            ],
+            width=200,
+            height=200
+        )
+        
+        # Main increment button (large, centered)
+        increment_btn = ft.IconButton(
+            icon=ft.Icons.ADD_CIRCLE,
+            icon_size=80,
+            icon_color=ft.Colors.PRIMARY,
+            on_click=lambda: self._increment_counter()
+        )
+        
+        # Action buttons
+        reset_btn = ft.IconButton(
+            icon=ft.Icons.REFRESH,
+            tooltip="Reset Counter",
+            on_click=lambda: self._reset_current_counter()
+        )
+        
+        prev_btn = ft.IconButton(
+            icon=ft.Icons.ARROW_BACK,
+            tooltip="Previous Dhikr",
+            on_click=lambda: self._switch_to_prev_dhikr()
+        )
+        
+        next_btn = ft.IconButton(
+            icon=ft.Icons.ARROW_FORWARD,
+            tooltip="Next Dhikr",
+            on_click=lambda: self._switch_to_next_dhikr()
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    # Dhikr text
+                    ft.Container(
+                        content=self.dhikr_display,
+                        padding=16,
+                        bgcolor=ft.Colors.SURFACE_VARIANT,
+                        border_radius=8
+                    ),
+                    
+                    # Progress circle with counter
+                    ft.Container(
+                        content=progress_stack,
+                        alignment=ft.alignment.center,
+                        padding=20
+                    ),
+                    
+                    # Increment button
+                    ft.Container(
+                        content=increment_btn,
+                        alignment=ft.alignment.center
+                    ),
+                    
+                    # Navigation buttons
+                    ft.Row(
+                        controls=[prev_btn, reset_btn, next_btn],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        spacing=16
+                    ),
+                    
+                    # Statistics
+                    ft.Container(
+                        content=self.stats_text := ft.Text(
+                            size=11,
+                            color=ft.Colors.OUTLINE,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        padding=12
+                    )
+                ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                spacing=16
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.Colors.OUTLINE),
+            border_radius=12
+        )
+
+    def _create_target_selector(self) -> ft.Container:
+        """Create target preset buttons"""
+        
+        buttons = []
+        for target in self.TARGET_PRESETS:
+            btn = ft.ElevatedButton(
+                text=str(target),
+                on_click=lambda _, t=target: self._set_custom_target(t),
+                expand=True
+            )
+            buttons.append(btn)
+        
+        custom_target_field = ft.TextField(
+            label="Custom Target",
+            keyboard_type=ft.KeyboardType.NUMBER,
+            width=100
+        )
+        
+        def apply_custom_target(e):
+            try:
+                target = int(custom_target_field.value)
+                if target > 0:
+                    self._set_custom_target(target)
+                    custom_target_field.value = ""
+            except ValueError:
+                pass
+        
+        apply_btn = ft.IconButton(
+            icon=ft.Icons.CHECK,
+            on_click=apply_custom_target
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("Select Target", size=14, weight=ft.FontWeight.W600),
+                    ft.Row(controls=buttons, spacing=4),
+                    ft.Row(
+                        controls=[custom_target_field, apply_btn],
+                        spacing=4
+                    )
+                ],
+                spacing=8
+            ),
+            padding=12,
+            border=ft.border.all(1, ft.Colors.OUTLINE_VARIANT),
+            border_radius=8
+        )
+
+    def _create_dhikr_tabs(self) -> ft.Container:
+        """Create tabs for switching between dhikrs"""
+        
+        tabs = []
+        for idx, (name, counter) in enumerate(self.counters.items()):
+            is_selected = idx == self.current_dhikr_index
+            
+            tab = ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text(name, size=12, weight=ft.FontWeight.W600),
+                        ft.Text(f"{counter.current_count}/{counter.target}", size=10)
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    spacing=2
+                ),
+                padding=8,
+                bgcolor=ft.Colors.PRIMARY_CONTAINER if is_selected else ft.Colors.SURFACE,
+                border_radius=6,
+                on_click=lambda _, i=idx: (setattr(self, 'current_dhikr_index', i), self._update_display()),
+                expand=True
+            )
+            tabs.append(tab)
+        
+        return ft.Container(
+            content=ft.Row(
+                controls=tabs,
+                spacing=4
+            ),
+            padding=8,
+            border=ft.border.all(1, ft.Colors.OUTLINE_VARIANT),
+            border_radius=8
+        )
+
+    def _create_settings_section(self) -> ft.Container:
+        """Create settings for sound and vibration"""
+        
+        sound_toggle = ft.Switch(
+            value=self.sound_enabled,
+            on_change=lambda e: setattr(self, 'sound_enabled', e.control.value)
+        )
+        
+        vibration_toggle = ft.Switch(
+            value=self.vibration_enabled,
+            on_change=lambda e: setattr(self, 'vibration_enabled', e.control.value)
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Row(
+                        controls=[
+                            ft.Icon(ft.Icons.VOLUME_UP, size=18),
+                            ft.Text("Sound", expand=True),
+                            sound_toggle
+                        ]
+                    ),
+                    ft.Row(
+                        controls=[
+                            ft.Icon(ft.Icons.VIBRATION, size=18),
+                            ft.Text("Vibration", expand=True),
+                            vibration_toggle
+                        ]
+                    )
+                ],
+                spacing=8
+            ),
+            padding=12,
+            border=ft.border.all(1, ft.Colors.OUTLINE_VARIANT),
+            border_radius=8
+        )
+
+    def build(self):
+        """Build the complete Tasbih view"""
+        
+        self._update_display()
+        
+        return ft.Column(
+            controls=[
+                ft.Container(
+                    content=ft.Text(
+                        "Tasbih Counter",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    padding=16
+                ),
+                
+                ft.ListView(
+                    controls=[
+                        ft.Container(
+                            content=ft.Column(
+                                controls=[
+                                    self._create_counter_card(),
+                                    self._create_dhikr_tabs(),
+                                    self._create_target_selector(),
+                                    self._create_settings_section(),
+                                    ft.SizedBox(height=20)
+                                ],
+                                spacing=12
+                            ),
+                            padding=ft.padding.symmetric(horizontal=16, vertical=8)
+                        )
+                    ],
+                    expand=True,
+                    spacing=0,
+                    padding=0
+                )
+            ],
+            expand=True,
+            spacing=0
+        )

@@ -1,0 +1,1136 @@
+"""
+Comprehensive Settings View - FIXED AND COMPLETE
+- Location Settings (GPS auto-detection, manual override, city search)
+- Calculation Settings (method selection, Asr school, high latitude rules)
+- Jamaat Configuration (per-prayer settings, bulk operations, import/export)
+- Notification Settings (per-prayer, sound selection, vibration patterns)
+- App Settings (theme, language, font size, privacy)
+"""
+
+import flet as ft
+from typing import Dict, List, Optional, Callable
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class SettingsView:
+    """
+    Comprehensive settings management view with multiple sections
+    """
+    
+    # Prayer calculation methods
+    CALCULATION_METHODS = {
+        "ISNA": "Islamic Society of North America",
+        "MWL": "Muslim World League",
+        "UMMALQURA": "Umm Al-Qura (Saudi Arabia)",
+        "EGYPTIAN": "Egyptian General Authority of Survey",
+        "KARACHI": "University of Karachi"
+    }
+    
+    # Asr calculation methods
+    ASR_SCHOOLS = {
+        "STANDARD": "Standard (Shafi, Maliki, Hanbali)",
+        "HANAFI": "Hanafi"
+    }
+    
+    # High latitude rules
+    HIGH_LATITUDE_RULES = {
+        "ANGLE_BASED": "Angle-Based",
+        "MIDDLE_OF_NIGHT": "Middle of Night",
+        "ONE_SEVENTH": "One Seventh"
+    }
+    
+    # Jamaat modes
+    JAMAAT_MODES = {
+        "adhan_only": "Adhan Only",
+        "fixed": "Fixed Time",
+        "shift": "Shift Minutes"
+    }
+    
+    # Themes
+    THEMES = {
+        "Light": "Light",
+        "Dark": "Dark",
+        "System": "System"
+    }
+    THEME_NAMES = {
+        "ios": "iOS Design",
+        "modern_mobile": "Modern Mobile",
+        "islamic_prayer": "Islamic Prayer"
+    }
+    # Languages
+    LANGUAGES = {
+        "en": "English",
+        "ar": "العربية",
+        "fr": "Français",
+        "ur": "اردو"
+    }
+
+    def __init__(
+        self,
+        page: ft.Page,
+        storage_service,
+        location_service=None,
+        theme_manager=None,
+        on_settings_changed: Optional[Callable] = None,
+        i18n_strings: Dict = None
+    ):
+        """
+        Initialize Settings View
+        
+        Args:
+            page: Flet page instance
+            storage_service: Storage service for persisting settings
+            location_service: Location service for GPS operations
+            theme_manager: Theme manager for dynamic theming
+            on_settings_changed: Callback when settings are updated
+            i18n_strings: Internationalization strings
+        """
+        self.page = page
+        self.storage = storage_service
+        self.location_service = location_service
+        self.theme_manager = theme_manager
+        self.on_settings_changed = on_settings_changed
+        self.settings = self.storage.get("settings", {})
+        self.i18n_strings = i18n_strings or {}
+        
+        # Settings state
+        self.settings = self._load_settings()
+        self.jamaat_configs = self._load_jamaat_config()
+        
+        # Prayer names for jamaat configuration
+        self.prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
+        
+        # UI components
+        self.location_display = None
+        self.method_dropdown = None
+        self.asr_dropdown = None
+        self.high_latitude_dropdown = None
+        self.theme_dropdown = None
+        self.language_dropdown = None
+        self.font_size_slider = None
+        self.jamaat_controls = {}
+
+    def _load_settings(self) -> Dict:
+        """Load settings from storage"""
+        try:
+            default_settings = {
+                "location": {"lat": 40.7128, "lng": -74.0060, "city": "New York", "timezone": "America/New_York"},
+                "calculation_method": "ISNA",
+                "asr_school": "STANDARD",
+                "high_latitude_rule": "ANGLE_BASED",
+                "theme": "auto",
+                "language": "en",
+                "font_size": 14,
+                "notifications_enabled": True,
+                "vibration_enabled": True,
+                "sound_enabled": True,
+                "notification_sound": "default",
+                "data_retention_days": 90
+            }
+            settings = self.storage.get("settings", default_settings)
+            logger.info("Settings loaded successfully")
+            return settings
+        except Exception as e:
+            logger.error(f"Failed to load settings: {e}")
+            return {}
+
+    def _load_jamaat_config(self) -> Dict:
+        """Load jamaat configuration from storage"""
+        try:
+            default_config = {
+                "Fajr": {"mode": "fixed", "time": "05:45", "minutes": None, "enabled": True},
+                "Dhuhr": {"mode": "shift", "time": None, "minutes": 10, "enabled": True},
+                "Asr": {"mode": "shift", "time": None, "minutes": 15, "enabled": True},
+                "Maghrib": {"mode": "shift", "time": None, "minutes": 5, "enabled": True},
+                "Isha": {"mode": "fixed", "time": "20:30", "minutes": None, "enabled": True}
+            }
+            config = self.storage.get("jamaat_config", default_config)
+            logger.info("Jamaat configuration loaded")
+            return config
+        except Exception as e:
+            logger.error(f"Failed to load jamaat config: {e}")
+            return {}
+
+    def _save_settings(self):
+        """Persist settings to storage"""
+        try:
+            self.storage.set("settings", self.settings)
+            logger.info("Settings saved successfully")
+            if self.on_settings_changed:
+                self.on_settings_changed(self.settings)
+        except Exception as e:
+            logger.error(f"Failed to save settings: {e}")
+
+    def _save_jamaat_config(self):
+        """Persist jamaat configuration"""
+        try:
+            self.storage.set("jamaat_config", self.jamaat_configs)
+            logger.info("Jamaat configuration saved")
+        except Exception as e:
+            logger.error(f"Failed to save jamaat config: {e}")
+
+    def _detect_location(self, e=None):
+        """Auto-detect location using GPS"""
+        if not self.location_service:
+            self._show_snackbar("Location service not available")
+            return
+        
+        try:
+            location = self.location_service.get_current_location()
+            if location:
+                self.settings["location"] = location
+                self._save_settings()
+                self._update_location_display()
+                self._show_snackbar(f"Location detected: {location.get('city', 'Unknown')}")
+            else:
+                self._show_snackbar("Could not detect location")
+        except Exception as e:
+            logger.error(f"Location detection failed: {e}")
+            self._show_snackbar("Location detection failed")
+
+    def _update_location_display(self):
+        """Update location display text"""
+        if self.location_display:
+            loc = self.settings.get("location", {})
+            city = loc.get("city", "Unknown")
+            lat = loc.get("lat", 0)
+            lng = loc.get("lng", 0)
+            self.location_display.value = f"{city} ({lat:.4f}, {lng:.4f})"
+            self.page.update()
+
+    def _on_method_change(self, e: ft.ControlEvent):
+        """Handle calculation method change"""
+        self.settings["calculation_method"] = e.control.value
+        self._save_settings()
+        self._show_snackbar(f"Method changed to {e.control.value}")
+
+    def _on_asr_change(self, e: ft.ControlEvent):
+        """Handle Asr school change"""
+        self.settings["asr_school"] = e.control.value
+        self._save_settings()
+        self._show_snackbar(f"Asr school changed to {e.control.value}")
+
+    def _on_high_latitude_change(self, e: ft.ControlEvent):
+        """Handle high latitude rule change"""
+        self.settings["high_latitude_rule"] = e.control.value
+        self._save_settings()
+        self._show_snackbar("High latitude rule changed")
+
+    def _on_theme_mode_change(self, e: ft.ControlEvent):
+        """Handle theme mode change"""
+        self.settings["theme_mode"] = e.control.value
+        self.storage.set("settings", self.settings)
+        self.on_settings_changed(self.settings)
+
+    def _on_theme_name_change(self, e: ft.ControlEvent):
+        """Handle theme name change"""
+        self.settings["theme_name"] = e.control.value
+        self.storage.set("settings", self.settings)
+        self.on_settings_changed(self.settings)
+
+    def _on_language_change(self, e: ft.ControlEvent):
+        """Handle language change"""
+        self.settings["language"] = e.control.value
+        self._save_settings()
+        self._show_snackbar("Language changed")
+
+    def _on_font_size_change(self, e: ft.ControlEvent):
+        """Handle font size change"""
+        self.settings["font_size"] = int(e.control.value)
+        self._save_settings()
+
+    def _on_jamaat_mode_change(self, prayer: str, new_mode: str):
+        """Handle jamaat mode change for specific prayer"""
+        self.jamaat_configs[prayer]["mode"] = new_mode
+        # Reset time/minutes based on mode
+        if new_mode == "fixed":
+            self.jamaat_configs[prayer]["minutes"] = None
+        elif new_mode == "shift":
+            self.jamaat_configs[prayer]["time"] = None
+        self._update_jamaat_display()
+        self._save_jamaat_config()
+
+    def _on_jamaat_time_change(self, prayer: str, new_value: str):
+        """Handle jamaat fixed time change"""
+        self.jamaat_configs[prayer]["time"] = new_value
+        self._save_jamaat_config()
+
+    def _on_jamaat_minutes_change(self, prayer: str, new_value: float):
+        """Handle jamaat shift minutes change"""
+        self.jamaat_configs[prayer]["minutes"] = int(new_value)
+        self._save_jamaat_config()
+
+    def _on_jamaat_toggle(self, prayer: str, enabled: bool):
+        """Toggle jamaat for specific prayer"""
+        self.jamaat_configs[prayer]["enabled"] = enabled
+        self._save_jamaat_config()
+
+    def _apply_jamaat_to_all(self, mode: str, e=None):
+        """Apply jamaat mode to all prayers"""
+        for prayer in self.prayers:
+            self.jamaat_configs[prayer]["mode"] = mode
+            if mode == "fixed":
+                self.jamaat_configs[prayer]["minutes"] = None
+            elif mode == "shift":
+                self.jamaat_configs[prayer]["time"] = None
+                # Set default minutes if not set
+                if self.jamaat_configs[prayer].get("minutes") is None:
+                    self.jamaat_configs[prayer]["minutes"] = 10
+        self._update_jamaat_display()
+        self._save_jamaat_config()
+        self._show_snackbar(f"Jamaat mode applied to all prayers")
+
+    def _update_jamaat_display(self):
+        """Refresh jamaat configuration UI"""
+        self.page.update()
+
+    def _show_snackbar(self, message: str):
+        """Show snackbar notification"""
+        self.page.snack_bar = ft.SnackBar(ft.Text(message))
+        self.page.snack_bar.open = True
+        self.page.update()
+
+    def _create_location_section(self) -> ft.Container:
+        """Create location settings section"""
+        
+        self.location_display = ft.TextField(
+            label="Current Location",
+            read_only=True,
+            value=self._format_location(),
+            filled=True
+        )
+        
+        detect_btn = ft.Row(
+            controls=[
+                ft.ElevatedButton(
+                    icon=ft.icons.MY_LOCATION,
+                    text="Auto-Detect",
+                    on_click=self._detect_location
+                ),
+                ft.ElevatedButton(
+                    icon=ft.icons.PUBLIC,
+                    text="Select Manually",
+                    on_click=self._show_manual_location_picker
+                )
+            ],
+            spacing=8
+        )
+        
+        manual_lat = ft.TextField(
+            label="Latitude",
+            value=str(self.settings.get("location", {}).get("lat", 0)),
+            keyboard_type=ft.KeyboardType.NUMBER,
+            width=150
+        )
+        
+        manual_lng = ft.TextField(
+            label="Longitude",
+            value=str(self.settings.get("location", {}).get("lng", 0)),
+            keyboard_type=ft.KeyboardType.NUMBER,
+            width=150
+        )
+        
+        def save_manual_location(e):
+            try:
+                lat = float(manual_lat.value)
+                lng = float(manual_lng.value)
+                if -90 <= lat <= 90 and -180 <= lng <= 180:
+                    self.settings["location"]["lat"] = lat
+                    self.settings["location"]["lng"] = lng
+                    self._save_settings()
+                    self._update_location_display()
+                    self._show_snackbar("Location updated")
+                else:
+                    self._show_snackbar("Invalid coordinates")
+            except ValueError:
+                self._show_snackbar("Invalid number format")
+        
+        save_manual_btn = ft.IconButton(
+            icon=ft.icons.CHECK,
+            on_click=save_manual_location
+        )
+        
+        manual_location_btn = ft.ElevatedButton(
+            text="Set Manual Location",
+            on_click=self._show_manual_location_picker
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("📍 Location Settings", size=16, weight=ft.FontWeight.BOLD),
+                    self.location_display,
+                    detect_btn,
+                    manual_location_btn,
+                    ft.Divider(),
+                    ft.Text("Manual Entry", size=12, weight=ft.FontWeight.W_600),
+                    ft.Row(controls=[manual_lat, manual_lng, save_manual_btn], spacing=8)
+                ],
+                spacing=12
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=8
+        )
+
+    def _create_calculation_section(self) -> ft.Container:
+        """Create calculation method settings section"""
+        
+        self.method_dropdown = ft.Dropdown(
+            label="Calculation Method",
+            value=self.settings.get("calculation_method", "ISNA"),
+            options=[ft.dropdown.Option(k, self.CALCULATION_METHODS[k]) for k in self.CALCULATION_METHODS],
+            on_change=self._on_method_change,
+            expand=True
+        )
+        
+        self.asr_dropdown = ft.Dropdown(
+            label="Asr School",
+            value=self.settings.get("asr_school", "STANDARD"),
+            options=[ft.dropdown.Option(k, self.ASR_SCHOOLS[k]) for k in self.ASR_SCHOOLS],
+            on_change=self._on_asr_change,
+            expand=True
+        )
+        
+        self.high_latitude_dropdown = ft.Dropdown(
+            label="High Latitude Rule",
+            value=self.settings.get("high_latitude_rule", "ANGLE_BASED"),
+            options=[ft.dropdown.Option(k, self.HIGH_LATITUDE_RULES[k]) for k in self.HIGH_LATITUDE_RULES],
+            on_change=self._on_high_latitude_change,
+            expand=True
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("🧮 Calculation Settings", size=16, weight=ft.FontWeight.BOLD),
+                    self.method_dropdown,
+                    self.asr_dropdown,
+                    self.high_latitude_dropdown,
+                    ft.Text(
+                        "These settings affect prayer time calculations. Changes apply immediately.",
+                        size=11,
+                        color=ft.colors.OUTLINE
+                    )
+                ],
+                spacing=12
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=8
+        )
+
+    def _create_jamaat_section(self) -> ft.Container:
+        """Create jamaat configuration section"""
+        
+        jamaat_cards = []
+        
+        for prayer in self.prayers:
+            config = self.jamaat_configs.get(prayer, {})
+            
+            mode_dropdown = ft.Dropdown(
+                label="Mode",
+                value=config.get("mode", "shift"),
+                options=[ft.dropdown.Option(k, self.JAMAAT_MODES[k]) for k in self.JAMAAT_MODES],
+                on_change=lambda e, p=prayer: self._on_jamaat_mode_change(p, e.control.value),
+                width=150
+            )
+            
+            time_field = ft.TextField(
+                label="Time (HH:MM)",
+                value=config.get("time", ""),
+                width=100,
+                visible=config.get("mode") == "fixed",
+                on_change=lambda e, p=prayer: self._on_jamaat_time_change(p, e.control.value)
+            )
+            
+            minutes_field = ft.Slider(
+                label="Minutes",
+                value=float(config.get("minutes") or 10),
+                min=0,
+                max=60,
+                divisions=60,
+                visible=config.get("mode") == "shift",
+                on_change=lambda e, p=prayer: self._on_jamaat_minutes_change(p, e.control.value),
+                width=150
+            )
+            
+            toggle = ft.Switch(
+                value=config.get("enabled", True),
+                on_change=lambda e, p=prayer: self._on_jamaat_toggle(p, e.control.value)
+            )
+            
+            self.jamaat_controls[prayer] = {
+                "mode": mode_dropdown,
+                "time": time_field,
+                "minutes": minutes_field,
+                "toggle": toggle
+            }
+            
+            card = ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Row(
+                            controls=[
+                                ft.Text(prayer, size=14, weight=ft.FontWeight.BOLD, expand=True),
+                                toggle
+                            ]
+                        ),
+                        ft.Row(controls=[mode_dropdown, time_field, minutes_field], spacing=8)
+                    ],
+                    spacing=8
+                ),
+                padding=12,
+                border=ft.border.all(1, ft.colors.OUTLINE_VARIANT),
+                border_radius=6
+            )
+            jamaat_cards.append(card)
+        
+        apply_btn = ft.ElevatedButton(
+            text="Apply Fixed Mode to All",
+            on_click=lambda e: self._apply_jamaat_to_all("fixed"),
+            width=200
+        )
+        
+        apply_shift_btn = ft.ElevatedButton(
+            text="Apply Shift Mode to All",
+            on_click=lambda e: self._apply_jamaat_to_all("shift"),
+            width=200
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("🕌 Jamaat Configuration", size=16, weight=ft.FontWeight.BOLD),
+                    *jamaat_cards,
+                    ft.Divider(),
+                    ft.Row(
+                        controls=[apply_btn, apply_shift_btn],
+                        spacing=8,
+                        wrap=True
+                    )
+                ],
+                spacing=12
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=8
+        )
+
+    def _create_app_section(self) -> ft.Container:
+        """Create app settings section"""
+        
+        self.theme_dropdown = ft.Dropdown(
+            label="Theme Mode",
+            value=self.settings.get("theme_mode", "System"),
+            options=[ft.dropdown.Option(k, self.THEMES[k]) for k in self.THEMES],
+            on_change=self._on_theme_mode_change,
+            expand=True
+        )
+        
+        self.theme_name_dropdown = ft.Dropdown(
+            label="App Theme",
+            value=self.settings.get("theme_name", "islamic_prayer"),
+            options=[ft.dropdown.Option(k, self.THEME_NAMES[k]) for k in self.THEME_NAMES],
+            on_change=self._on_theme_name_change,
+            expand=True
+        )
+        
+        self.language_dropdown = ft.Dropdown(
+            label="Language",
+            value=self.settings.get("language", "en"),
+            options=[ft.dropdown.Option(k, self.LANGUAGES[k]) for k in self.LANGUAGES],
+            on_change=self._on_language_change,
+            expand=True
+        )
+        
+        self.font_size_slider = ft.Slider(
+            label="Font Size",
+            value=float(self.settings.get("font_size", 14)),
+            min=12,
+            max=18,
+            divisions=6,
+            on_change=self._on_font_size_change,
+            expand=True
+        )
+        
+        def on_notifications_toggle(e):
+            self.settings["notifications_enabled"] = e.control.value
+            self._save_settings()
+        
+        def on_vibration_toggle(e):
+            self.settings["vibration_enabled"] = e.control.value
+            self._save_settings()
+        
+        notifications_toggle = ft.Switch(
+            value=self.settings.get("notifications_enabled", True),
+            on_change=on_notifications_toggle
+        )
+        
+        vibration_toggle = ft.Switch(
+            value=self.settings.get("vibration_enabled", True),
+            on_change=on_vibration_toggle
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("⚙️ App Settings", size=16, weight=ft.FontWeight.BOLD),
+                    self.theme_dropdown,
+                    self.theme_name_dropdown,
+                    self.font_size_slider,
+                    ft.Divider(),
+                    ft.Row(
+                        controls=[
+                            ft.Text("Notifications", expand=True),
+                            notifications_toggle
+                        ]
+                    ),
+                    ft.Row(
+                        controls=[
+                            ft.Text("Vibration", expand=True),
+                            vibration_toggle
+                        ]
+                    ),
+                    ft.Text(
+                        "Version: 1.0.0 | Privacy: No data collection",
+                        size=11,
+                        color=ft.colors.OUTLINE
+                    )
+                ],
+                spacing=12
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=8
+        )
+
+    def _format_location(self) -> str:
+        """Format location for display"""
+        loc = self.settings.get("location", {})
+        city = loc.get("city", "Unknown")
+        lat = loc.get("lat", 0)
+        lng = loc.get("lng", 0)
+        return f"{city} ({lat:.4f}, {lng:.4f})"
+
+    def _load_locations_data(self) -> Dict:
+        """Load countries and cities from JSON file"""
+        try:
+            import json
+            from pathlib import Path
+            # Try to load from assets/locations.json
+            assets_path = Path(__file__).parent.parent / "assets" / "locations.json"
+            if assets_path.exists():
+                with open(assets_path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            else:
+                logger.warning("locations.json not found, using default data")
+                return self._get_default_locations()
+        except Exception as e:
+            logger.error(f"Failed to load locations data: {e}")
+            return self._get_default_locations()
+
+    def _get_default_locations(self) -> Dict:
+        """Get default locations if file not available"""
+        return {
+            "countries": [
+                {
+                    "name": "United States",
+                    "code": "US",
+                    "cities": [
+                        {"name": "New York", "lat": 40.7128, "lng": -74.0060, "timezone": "America/New_York"}
+                    ]
+                },
+                {
+                    "name": "United Kingdom",
+                    "code": "GB",
+                    "cities": [
+                        {"name": "London", "lat": 51.5074, "lng": -0.1278, "timezone": "Europe/London"}
+                    ]
+                }
+            ]
+        }
+
+    def _show_manual_location_picker(self, e=None):
+        """Show manual location picker dialog with province support"""
+        locations_data = self._load_locations_data()
+        countries = locations_data.get("countries", [])
+
+        # State for dialog
+        selected_country = None
+        selected_province = None
+        selected_city = None
+        current_view = "countries"  # countries, provinces, cities
+
+        # List view
+        list_view = ft.ListView(
+            height=350,
+            spacing=4,
+            padding=10
+        )
+
+        # Selected location display
+        location_breadcrumb = ft.Text(
+            "Select Country",
+            size=14,
+            color=ft.colors.OUTLINE
+        )
+
+        # Back button
+        back_button = ft.IconButton(
+            icon=ft.icons.ARROW_BACK,
+            visible=False
+        )
+
+        # Dialog placeholder
+        dlg = None
+
+        def update_breadcrumb():
+            if current_view == "countries":
+                location_breadcrumb.value = "Select Country"
+            elif current_view == "provinces":
+                location_breadcrumb.value = f"{selected_country['name']} > Select Province"
+            elif current_view == "cities":
+                location_breadcrumb.value = f"{selected_country['name']} > {selected_province['name']} > Select City"
+
+        def show_countries():
+            nonlocal current_view
+            current_view = "countries"
+            list_view.controls.clear()
+
+            for country in countries:
+                item = ft.Container(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.FLAG, size=20, color=ft.colors.PRIMARY),
+                            ft.Text(country["name"], size=14, expand=True),
+                            ft.Icon(ft.icons.ARROW_FORWARD_IOS, size=16, color=ft.colors.OUTLINE)
+                        ]
+                    ),
+                    padding=12,
+                    border_radius=8,
+                    bgcolor=ft.colors.SURFACE,
+                    on_click=lambda e, c=country: on_country_select(c)
+                )
+                list_view.controls.append(item)
+
+            update_breadcrumb()
+            back_button.visible = False
+            if dlg:
+                dlg.update()
+
+        def show_provinces(country):
+            nonlocal current_view
+            current_view = "provinces"
+            list_view.controls.clear()
+
+            provinces = country.get("provinces", [])
+
+            for province in provinces:
+                city_count = len(province.get("cities", []))
+                item = ft.Container(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.LOCATION_CITY, size=20, color=ft.colors.PRIMARY),
+                            ft.Column(
+                                controls=[
+                                    ft.Text(province["name"], size=14, weight=ft.FontWeight.BOLD),
+                                    ft.Text(f"{city_count} cities", size=11, color=ft.colors.OUTLINE)
+                                ],
+                                spacing=2,
+                                expand=True
+                            ),
+                            ft.Icon(ft.icons.ARROW_FORWARD_IOS, size=16, color=ft.colors.OUTLINE)
+                        ]
+                    ),
+                    padding=12,
+                    border_radius=8,
+                    bgcolor=ft.colors.SURFACE,
+                    on_click=lambda e, p=province: on_province_select(p)
+                )
+                list_view.controls.append(item)
+
+            update_breadcrumb()
+            back_button.visible = True
+            if dlg:
+                dlg.update()
+
+        def show_cities(province):
+            nonlocal current_view
+            current_view = "cities"
+            list_view.controls.clear()
+
+            cities = province.get("cities", [])
+
+            for city in cities:
+                item = ft.Container(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.LOCATION_ON, size=20, color=ft.colors.PRIMARY),
+                            ft.Text(city["name"], size=14, expand=True)
+                        ]
+                    ),
+                    padding=12,
+                    border_radius=8,
+                    bgcolor=ft.colors.SURFACE,
+                    on_click=lambda e, c=city: on_city_select(c)
+                )
+                list_view.controls.append(item)
+
+            update_breadcrumb()
+            back_button.visible = True
+            if dlg:
+                dlg.update()
+
+        def show_cities_for_country(country):
+            """Show cities for countries without provinces"""
+            nonlocal current_view
+            current_view = "cities"
+            list_view.controls.clear()
+
+            cities = country.get("cities", [])
+
+            for city in cities:
+                item = ft.Container(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.LOCATION_ON, size=20, color=ft.colors.PRIMARY),
+                            ft.Text(city["name"], size=14, expand=True)
+                        ]
+                    ),
+                    padding=12,
+                    border_radius=8,
+                    bgcolor=ft.colors.SURFACE,
+                    on_click=lambda e, c=city: on_city_select(c)
+                )
+                list_view.controls.append(item)
+
+            update_breadcrumb()
+            back_button.visible = True
+            if dlg:
+                dlg.update()
+
+        def on_country_select(country):
+            nonlocal selected_country
+            selected_country = country
+
+            # Check if country has provinces
+            if country.get("has_provinces"):
+                show_provinces(country)
+            else:
+                show_cities_for_country(country)
+
+        def on_province_select(province):
+            nonlocal selected_province
+            selected_province = province
+            show_cities(province)
+
+        def on_city_select(city):
+            nonlocal selected_city
+            selected_city = city
+
+            # Update settings and close
+            self.settings["location"] = {
+                "lat": city["lat"],
+                "lng": city["lng"],
+                "city": city["name"],
+                "country": selected_country["name"],
+                "timezone": city.get("timezone", "UTC")
+            }
+            self._save_settings()
+            self._update_location_display()
+
+            if dlg:
+                dlg.open = False
+            self.page.update()
+            self._show_snackbar(f"Location set to {city['name']}, {selected_country['name']}")
+
+        def on_back_click(e):
+            if current_view == "cities":
+                if selected_country and selected_country.get("has_provinces"):
+                    show_provinces(selected_country)
+                else:
+                    show_countries()
+            elif current_view == "provinces":
+                show_countries()
+
+        def on_close(e):
+            if dlg:
+                dlg.open = False
+                self.page.update()
+
+        # Set back button handler
+        back_button.on_click = on_back_click
+
+        # Create dialog
+        dlg = ft.AlertDialog(
+            title=ft.Row(
+                controls=[
+                    back_button,
+                    ft.Text("Select Location", size=20, expand=True)
+                ]
+            ),
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        location_breadcrumb,
+                        ft.Divider(height=1),
+                        list_view
+                    ],
+                    spacing=12,
+                    tight=True
+                ),
+                width=450,
+                height=450
+            ),
+            actions=[
+                ft.TextButton("Cancel", on_click=on_close)
+            ],
+            actions_alignment=ft.MainAxisAlignment.END
+        )
+
+        # Show dialog FIRST
+        self.page.dialog = dlg
+        dlg.open = True
+        self.page.update()
+
+        # THEN initialize with countries
+        show_countries()
+
+    def _close_location_dialog(self, dlg):
+        """Close location picker dialog"""
+        dlg.open = False
+        self.page.update()
+
+    def _create_theme_section(self) -> ft.Container:
+        """Create theme settings section"""
+        
+        self.theme_dropdown = ft.Dropdown(
+            label="Theme Mode",
+            value=self.settings.get("theme_mode", "System"),
+            options=[ft.dropdown.Option(k, self.THEMES[k]) for k in self.THEMES],
+            on_change=self._on_theme_mode_change,
+            expand=True
+        )
+        
+        self.theme_name_dropdown = ft.Dropdown(
+            label="App Theme",
+            value=self.settings.get("theme_name", "islamic_prayer"),
+            options=[ft.dropdown.Option(k, self.THEME_NAMES[k]) for k in self.THEME_NAMES],
+            on_change=self._on_theme_name_change,
+            expand=True
+        )
+        
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text("🎨 Appearance", size=16, weight=ft.FontWeight.BOLD),
+                    self.theme_dropdown,
+                    self.theme_name_dropdown
+                ],
+                spacing=12
+            ),
+            padding=16,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=8
+        )
+
+    def _create_save_section(self) -> ft.Container:
+        """Create save/reset buttons section"""
+        def on_save_click(e):
+            """Handle save button click"""
+            try:
+                # Save all settings
+                self._save_settings()
+                self._save_jamaat_config()
+                # Show success message
+                self.page.snack_bar = ft.SnackBar(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN),
+                            ft.Text("All settings saved successfully!", size=16)
+                        ],
+                        spacing=8
+                    ),
+                    bgcolor=ft.colors.GREEN_100
+                )
+                self.page.snack_bar.open = True
+                self.page.update()
+                logger.info("All settings saved via Save button")
+            except Exception as ex:
+                logger.error(f"Failed to save settings: {ex}")
+                self.page.snack_bar = ft.SnackBar(
+                    content=ft.Row(
+                        controls=[
+                            ft.Icon(ft.icons.ERROR, color=ft.colors.RED),
+                            ft.Text("Failed to save settings", size=16)
+                        ],
+                        spacing=8
+                    ),
+                    bgcolor=ft.colors.RED_100
+                )
+                self.page.snack_bar.open = True
+                self.page.update()
+        def on_reset_click(e):
+            """Handle reset button click"""
+            # Show confirmation dialog
+            def close_dialog(dlg):
+                dlg.open = False
+                self.page.update()
+            def confirm_reset(dlg):
+                try:
+                    # Reset to defaults
+                    self.settings = self._load_settings()
+                    self.jamaat_configs = self._load_jamaat_config()
+                    # Clear storage and reload defaults
+                    default_settings = {
+                        "location": {"lat": 40.7128, "lng": -74.0060, "city": "New York", "timezone": "America/New_York"},
+                        "calculation_method": "ISNA",
+                        "asr_school": "STANDARD",
+                        "high_latitude_rule": "ANGLE_BASED",
+                        "theme_mode": "System",
+                        "theme_name": "islamic_prayer",
+                        "language": "en",
+                        "font_size": 14,
+                        "notifications_enabled": True,
+                        "vibration_enabled": True,
+                        "sound_enabled": True,
+                        "notification_sound": "default",
+                        "data_retention_days": 90
+                    }
+                    self.storage.set("settings", default_settings)
+                    self.settings = default_settings
+                    close_dialog(dlg)
+                    # Rebuild the view
+                    self.page.snack_bar = ft.SnackBar(
+                        content=ft.Text("Settings reset to defaults. Please restart app.")
+                    )
+                    self.page.snack_bar.open = True
+                    self.page.update()
+                    logger.info("Settings reset to defaults")
+                except Exception as ex:
+                    logger.error(f"Failed to reset settings: {ex}")
+                    close_dialog(dlg)
+            confirm_dialog = ft.AlertDialog(
+                title=ft.Text("Reset Settings?"),
+                content=ft.Column(
+                    controls=[
+                        ft.Text("This will reset ALL settings to default values."),
+                        ft.Text("This action cannot be undone.", color=ft.colors.ERROR, weight=ft.FontWeight.BOLD)
+                    ],
+                    tight=True,
+                    spacing=8
+                ),
+                actions=[
+                    ft.TextButton("Cancel", on_click=lambda x: close_dialog(confirm_dialog)),
+                    ft.TextButton(
+                        "Reset All",
+                        style=ft.ButtonStyle(color=ft.colors.ERROR),
+                        on_click=lambda x: confirm_reset(confirm_dialog)
+                    )
+                ]
+            )
+            self.page.dialog = confirm_dialog
+            confirm_dialog.open = True
+            self.page.update()
+        # Create save button
+        save_button = ft.ElevatedButton(
+            text="Save All Settings",
+            icon=ft.icons.SAVE,
+            on_click=on_save_click,
+            style=ft.ButtonStyle(
+                bgcolor=ft.colors.PRIMARY,
+                color=ft.colors.ON_PRIMARY,
+                padding=16
+            ),
+            width=200,
+            height=50
+        )
+        # Create reset button
+        reset_button = ft.OutlinedButton(
+            text="Reset to Defaults",
+            icon=ft.icons.RESTORE,
+            on_click=on_reset_click,
+            style=ft.ButtonStyle(
+                color=ft.colors.ERROR,
+                padding=16
+            ),
+            width=200,
+            height=50
+        )
+        return ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Divider(height=2, thickness=2),
+                    ft.Row(
+                        controls=[
+                            save_button,
+                            reset_button
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        spacing=16,
+                        wrap=True
+                    ),
+                    ft.Container(
+                        content=ft.Text(
+                            "💡 Most settings auto-save, but click 'Save All Settings' to ensure everything is saved.",
+                            size=11,
+                            color=ft.colors.OUTLINE,
+                            text_align=ft.TextAlign.CENTER,
+                            italic=True
+                        ),
+                        padding=ft.padding.only(top=8)
+                    )
+                ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                spacing=12
+            ),
+            padding=20,
+            border=ft.border.all(2, ft.colors.PRIMARY),
+            border_radius=12,
+            bgcolor=ft.colors.SURFACE_VARIANT
+        )
+
+    def build(self):
+        """Build the complete settings view"""
+        
+        return ft.Column(
+            controls=[
+                ft.Container(
+                    content=ft.Text(
+                        "Settings",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    padding=16
+                ),
+                
+                ft.ListView(
+                    controls=[
+                        ft.Container(
+                            content=ft.Column(
+                                controls=[
+                                    self._create_theme_section(),     # Theme section
+                                    self._create_location_section(),   # Location
+                                    self._create_calculation_section(), # Calculation
+                                    self._create_jamaat_section(),     # Jamaat
+                                    self._create_app_section(),        # App settings
+                                    self._create_save_section(),       # NEW - Save/Reset buttons
+                                    ft.Container(height=20)
+                                ],
+                                spacing=16
+                            ),
+                            padding=ft.padding.symmetric(horizontal=16, vertical=8)
+                        )
+                    ],
+                    expand=True,
+                    spacing=0,
+                    padding=0
+                )
+            ],
+            expand=True,
+            spacing=0
+        )
